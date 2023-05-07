@@ -1,0 +1,4 @@
+﻿@using ProductManagment
+@using ProductManagment.Models
+@namespace ProductManagment.Pages
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers

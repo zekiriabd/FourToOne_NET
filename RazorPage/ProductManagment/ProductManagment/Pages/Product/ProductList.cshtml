@@ -1,0 +1,48 @@
+﻿@page "/products"
+@using DevExtreme.AspNet.Mvc;
+@model ProductListModel
+
+@(Html.DevExtreme().DataGrid()
+    .ID("gridContainer")
+    .ShowBorders(true)
+    .DataSource(Model.Products)
+    .KeyExpr("Id")
+     .SearchPanel(searchPanel => searchPanel
+        .Visible(true)
+        .Width(240)
+        .Placeholder("Search...")
+    )
+    .Selection(s => s.Mode(SelectionMode.Single))
+    .HeaderFilter(headerFilter => headerFilter.Visible(true))
+    .AllowColumnReordering(true)
+    .ShowBorders(true)
+    .Grouping(grouping => grouping.AutoExpandAll(true))
+    .SearchPanel(searchPanel => searchPanel.Visible(true))
+    .GroupPanel(groupPanel => groupPanel.Visible(true))
+    .Paging(paging => paging.PageSize(10))
+    .Columns(c => {
+         c.AddFor(m => ((ProductModel)m).Image)
+           .Width(100)
+           .AllowFiltering(false)
+           .AllowSorting(false)
+           .CellTemplate(@<text>
+               <div>
+                   <img src="<%- value %>" alt="" width="100" />
+               </div>
+           </text>);
+
+        c.Add().DataField("Name");
+        c.Add().DataField("Comment");
+        c.Add().DataField("Price");
+        c.Add().DataField("Discount");
+    })
+)
+
+<div class="d-flex flex-row">
+@{
+    foreach (var pro in Model.Products)
+    {
+        <partial name="Compents/Product" model="@pro" />
+    }
+}
+</div>
