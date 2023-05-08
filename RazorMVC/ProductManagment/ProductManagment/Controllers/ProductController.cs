@@ -1,83 +1,58 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ProductManagment.Models;
 
 namespace ProductManagment.Controllers
 {
     public class ProductController : Controller
     {
-        // GET: ProductController
-        public ActionResult Index()
+        
+        public ActionResult _ProductList()
         {
-            return View();
+            return Ok(GetProductes());
+        }
+        public ActionResult ProductList()
+        {
+            return View(GetProductes());
         }
 
-        // GET: ProductController/Details/5
-        public ActionResult Details(int id)
+        private static List<ProductModel> GetProductes()
         {
-            return View();
-        }
-
-        // GET: ProductController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: ProductController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: ProductController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: ProductController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: ProductController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: ProductController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            return new List<ProductModel>() {
+                new ProductModel
+                {
+                Id = 1,
+                Name = "Nike Air Max ",
+                Image = "https://cdn11.bigcommerce.com/s-ktikayh2p6/images/stencil/original/products/475/20955/baskets-de-jogging-a-coussin-dair__55328.1665613384.jpg?c=1",
+                Comment = @"Confort rembourré
+                        La semelle intermédiaire en mousse et l'unité Max Air au talon amortissent votre pied pour
+                        un confort durable. Le col en mousse protège votre cheville à chacun de vos mouvements.",
+                Price = 109.99M,
+                Discount = 50,
+                },
+                 new ProductModel
+                {
+                Id = 2,
+                Name = "Nike Air Max 2",
+                Image = "https://cdn11.bigcommerce.com/s-ktikayh2p6/images/stencil/original/products/475/20955/baskets-de-jogging-a-coussin-dair__55328.1665613384.jpg?c=1",
+                Comment = @"Confort rembourré
+                        La semelle intermédiaire en mousse et l'unité Max Air au talon amortissent votre pied pour
+                        un confort durable. Le col en mousse protège votre cheville à chacun de vos mouvements.",
+                Price = 109.99M,
+                Discount = 50,
+                },
+                  new ProductModel
+                {
+                Id = 3,
+                Name = "Nike Air Max 3",
+                Image = "https://cdn11.bigcommerce.com/s-ktikayh2p6/images/stencil/original/products/475/20955/baskets-de-jogging-a-coussin-dair__55328.1665613384.jpg?c=1",
+                Comment = @"Confort rembourré
+                        La semelle intermédiaire en mousse et l'unité Max Air au talon amortissent votre pied pour
+                        un confort durable. Le col en mousse protège votre cheville à chacun de vos mouvements.",
+                Price = 109.99M,
+                Discount = 50,
+                },
+            };
         }
     }
 }

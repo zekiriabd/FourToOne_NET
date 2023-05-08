@@ -1,4 +1,98 @@
-﻿@page
-@model ProductManagment.Pages.Product.ProductListModel
+﻿@model IEnumerable<ProductManagment.Models.ProductModel>
+@{
+    ViewData["Title"] = "ProductList";
+}
 
-@*<partial name="Compents/Product" model="@Model.ProductItem" />*@
+<h1>ProductList</h1>
+
+
+@(Html.DevExtreme().DataGrid().ID("gridContainer")
+   .DataSource(d => d.Mvc().Controller("Product").LoadAction("_ProductList"))
+   .KeyExpr("Id")
+   .Columns(c =>
+   {
+       c.AddFor(m => ((ProductModel)m).Image)
+          .Width(100)
+          .AllowFiltering(false)
+          .AllowSorting(false)
+          .CellTemplate(@<text>
+              <div>
+                  <img src="<%- value %>" alt="" width="100" />
+              </div>
+          </text>);
+
+       c.Add().DataField("Name");
+       c.Add().DataField("Comment");
+       c.Add().DataField("Price");
+       c.Add().DataField("Discount");
+   })
+)
+
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Image)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Comment)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Discount)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+               <img src="@Html.DisplayFor(modelItem => item.Image)" alt="" width="100" />                
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Comment)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Discount)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+
+<div class="d-flex flex-row">
+    @{
+        foreach (var pro in Model)
+        {
+            <partial name="../Components/Product" model="@pro" />
+        }
+    }
+</div>
