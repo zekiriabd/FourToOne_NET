@@ -1,0 +1,34 @@
+﻿@page "/products"
+
+<RadzenDataGrid 
+    AllowFiltering="true" 
+    AllowColumnResize="true" 
+    AllowAlternatingRows="false" 
+    FilterMode="FilterMode.Advanced" 
+    AllowSorting="true" 
+    PageSize="5"
+    AllowPaging="true" 
+    PagerHorizontalAlign="HorizontalAlign.Left" 
+    ShowPagingSummary="true"
+    ColumnWidth="300px" 
+    LogicalFilterOperator="LogicalFilterOperator.Or"
+    Data="@Products"
+    TItem="ProductModel">
+    <Columns>
+        <RadzenDataGridColumn TItem="ProductModel" Property="Id" Filterable="false" Title="ID" Frozen="true" Width="80px" TextAlign="TextAlign.Center" />
+        <RadzenDataGridColumn TItem="ProductModel" Title="Image" Frozen="true" Sortable="false" Filterable="false" Width="150px" TextAlign="TextAlign.Center">
+            <Template Context="data"> 
+                <RadzenImage Path="@data.Image" Style="width:100px" />
+            </Template>
+        </RadzenDataGridColumn>
+        <RadzenDataGridColumn TItem="ProductModel" Property="Name" Title="Name" Frozen="true" Width="160px" />
+        <RadzenDataGridColumn TItem="ProductModel" Property="Comment" Title="Comment" Frozen="true" Width="160px" />
+        <RadzenDataGridColumn TItem="ProductModel" Property="Price" Title="Price" Frozen="true" Width="160px" />
+</Columns>
+</RadzenDataGrid>
+<div class="d-flex flex-row">
+    @foreach (var pro in Products)
+    {
+      <Product ProductParam="pro"/>
+    }
+</div>

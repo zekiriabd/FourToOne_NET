@@ -1,0 +1,21 @@
+﻿
+<div class="card" style="width: 18rem;">
+    <img class="card-img-top" src="@ProductParam.Image" alt="Card image cap">
+    <div class="card-body">
+        <h5 class="card-title">@ProductParam.Name</h5>
+        <p class="card-text">@ProductParam.Comment</p>
+
+        @if (ProductParam.Discount > 0)
+        {
+            <span class="text-decoration-line-through">@ProductParam.Price€</span>
+            <span class="text-danger m-2">@(ProductParam.Price * ProductParam.Discount / 100)€</span>
+        }
+        else
+        {
+            <span>@ProductParam.Price€</span>
+        }
+    </div>
+</div>
+@code {
+    [Parameter] public ProductModel ProductParam { get; set; }
+}
