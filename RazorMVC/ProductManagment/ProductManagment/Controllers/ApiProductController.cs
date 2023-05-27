@@ -1,22 +1,20 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using ProductManagment.Models;
 
 namespace ProductManagment.Controllers
 {
-    public class ProductController : Controller
-    {
-        //public ActionResult _ProductList()
-        //{
-        //    return Ok(GetProductes());
-        //}
-        
-        public ActionResult ProductList()
+        [ApiController]
+        [Route("api/{controller}/{action}")]
+        public class ApiProductController : ControllerBase
         {
-            return View(GetProductes());
-        }
-        private static List<ProductModel> GetProductes()
-        {
+            [HttpGet]
+            public IActionResult ProductList()
+            {
+                return Ok(GetProductes());
+            }
+
+            private static List<ProductModel> GetProductes()
+            {
             return new List<ProductModel>() {
                 new ProductModel
                 {
@@ -54,7 +52,5 @@ namespace ProductManagment.Controllers
             };
         }
 
-        
-        
-    }
+        }
 }

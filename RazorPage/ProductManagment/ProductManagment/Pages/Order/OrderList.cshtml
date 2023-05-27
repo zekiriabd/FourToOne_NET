@@ -1,0 +1,15 @@
+﻿@page "/orderlist"
+@model OrderListModel
+
+@{
+    ViewData["isActive"] = true;
+}
+<div class="d-flex flex-row">
+    @{
+        foreach (var pro in Model.SelectedProducts)
+        {
+            <partial name="Compents/ProductV" model="@pro" />
+            <button id="incrementButton">Incrémenter</button>
+        }
+    }
+</div>

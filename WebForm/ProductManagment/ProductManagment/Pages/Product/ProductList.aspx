@@ -1,40 +1,29 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Pages/Shared/_Layout.Master" AutoEventWireup="true" CodeBehind="ProductList.aspx.cs" Inherits="ProductManagment.Pages.Product.ProductList" %>
+
+<%@ Register Assembly="DevExpress.Web.v22.2, Version=22.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web" TagPrefix="dx" %>
 <%@ Register Src="~/Pages/Compents/Product.ascx" TagName="ProductComponent" TagPrefix="uc" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <%--<asp:GridView ID="GVProducts" runat="server"></asp:GridView> --%>  
 
-    <%--<%foreach(var prodect in Products) { %>
-       <table>
-           <tr><td><%=prodect.Name%></td></tr>
-       </table>
-    <%} %>--%>
 
-<div class="d-flex flex-row">
-<asp:Repeater ID="Repeater1" runat="server">
-    <ItemTemplate>                   
-        <uc:ProductComponent  runat="server" 
-            Name='<%# Eval("Name") %>'
-            Comment='<%# Eval("Comment") %>'
-            Image='<%# Eval("Image") %>'
-            Price='<%# Eval("Price") %>'
-            Discount='<%# Eval("Discount") %>'
-            />
-    </ItemTemplate>
-</asp:Repeater>
-     
+   <dx:ASPxGridView ID="GVProducts" runat="server" Width="100%"
+        KeyFieldName="Id" PreviewFieldName="Notes" EnableRowsCache="False">
+        <Settings ShowPreview="true" />
+        <SettingsPager PageSize="3" />
 
-  <%--<div class="card p2" style="width: 18rem;">
-    <img class="card-img-top" src="<%=prodect.Image%>" alt="Card image cap" width="50px">
-    <div class="card-body">
-    <h5 class="card-title"><%=prodect.Name%></h5>
-    <p class="card-text"><%=prodect.Comment%></p>
-    <p><%=prodect.Price%></p>
-  </div>
-  </div>
-    <%} %>--%>
-  
- </div>
+        <Columns>
+            <dx:GridViewDataColumn FieldName="Name" VisibleIndex="1" />
+            <dx:GridViewDataColumn FieldName="Comment" VisibleIndex="4" />
+            <dx:GridViewDataColumn FieldName="Price" VisibleIndex="2" />
+            <dx:GridViewDataColumn FieldName="Discount" VisibleIndex="3" />
+            <dx:GridViewDataColumn FieldName="Image" VisibleIndex="3" >
+             <DataItemTemplate>
+                <dx:ASPxBinaryImage ID="ASPxBinaryImage1" runat="server" Value='<%# Eval("Image") %>' />
+             </DataItemTemplate>
+            </dx:GridViewDataColumn>
+        </Columns>
+        
+    </dx:ASPxGridView>
 </asp:Content>

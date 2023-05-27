@@ -1,0 +1,43 @@
+﻿@model ProductModel
+
+@{
+    bool Readonly = (bool)ViewData["isActive"];
+}
+
+<div class="card h-100 shadow-sm @(Readonly ? "flex-column-reverse" : "")">
+    <img class="card-img-top" src="@Model.Image" alt="Card image cap">
+    <div class="card-body">
+        <h5 class="card-title">@Model.Name</h5>
+        <div class="clearfix mbr-3 col-2">
+            <span id="counterValue" class="float-start badge rounded-pill bg-primary">@Model.LikeCount</span>
+        </div>
+        <p class="card-text">@Model.Comment</p>
+       
+        @if (@Model.Discount > 0)
+        {
+            <span class="text-decoration-line-through">@Model.Price€</span>
+            <span class="text-danger m-2">@(Model.Price * Model.Discount / 100)€</span>
+        }
+        else
+        {
+            <span>@Model.Price€</span>
+        }
+    </div>
+    <div class="card-footer" hidden="@Readonly">
+            <div class="btn-ground text-center pb-1">
+            <form method="post">
+                <input value="Ajouter" type="submit" class="btn btn-primary"
+                       asp-page-handler="Add"
+                       asp-route-id="@Model.Id" />
+            </form>
+                
+            <form method="post">
+                <input value="J'aime" type="submit" class="btn btn-primary"
+                asp-page-handler="Submit" 
+                asp-route-id="@Model.Id"
+                />
+            </form>
+            </div>
+        </div>
+</div>
+

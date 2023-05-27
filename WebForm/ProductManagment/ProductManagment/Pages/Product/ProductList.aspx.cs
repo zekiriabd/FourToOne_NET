@@ -44,11 +44,10 @@ namespace ProductManagment.Pages.Product
                 Discount = 50,
                 },
             };
-            Repeater1.DataSource = Products;
-            Repeater1.DataBind();   
+            
 
-            //GVProducts.DataSource = Products;
-            //GVProducts.DataBind();
+            GVProducts.DataSource = Products;
+            GVProducts.DataBind();
         }
     }
 }

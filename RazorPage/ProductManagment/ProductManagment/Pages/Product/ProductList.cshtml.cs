@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ProductManagment.Models;
+using System.Xml.Linq;
 
 namespace ProductManagment.Pages.Product
 {
@@ -8,9 +9,25 @@ namespace ProductManagment.Pages.Product
     {
         public ProductModel ProductItem { get; set; }
         public List<ProductModel> Products { get; set; }
-       
+
+        public void OnPostSubmit(int id)
+        {
+            var like = int.Parse(HttpContext.Session.GetString("like")) + 1 ;
+            HttpContext.Session.SetString("like",like.ToString());
+            OnGet();
+            var selectedPro = Products.First(x => x.Id == id).LikeCount = like;
+        }
+
+        public void OnPostAdd(int id)
+        {
+           HttpContext.Session.SetString("ids", HttpContext.Session.GetString("ids") + "," +  id.ToString());
+            OnGet();
+        }
+
         public void OnGet()
         {
+            if(HttpContext.Session.GetString("like")== null)
+            HttpContext.Session.SetString("like", "0");
             Products = new List<ProductModel>() {
                 new ProductModel
                 {
