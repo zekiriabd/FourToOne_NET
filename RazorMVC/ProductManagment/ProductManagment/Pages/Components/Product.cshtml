@@ -1,8 +1,11 @@
 ﻿@model ProductModel
-<div class="card" style="width: 18rem;">
+<div class="card @(Convert.ToBoolean(ViewData["Readonly"]) ? "flex-column-reverse" : "")" style="width: 18rem;">
     <img class="card-img-top" src="@Model.Image" alt="Card image cap">
     <div class="card-body">
         <h5 class="card-title">@Model.Name</h5>
+        <div class="clearfix mbr-3 col-2">
+            <span id="likeLabel_@Model.Id" class="float-start badge rounded-pill bg-primary">@Model.LikeCount</span>
+        </div>
         <p class="card-text">@Model.Comment</p>
 
         @if (@Model.Discount > 0)
@@ -14,5 +17,12 @@
         {
             <span>@Model.Price€</span>
         }
+    </div>
+       
+    <div class="card-footer" hidden="@ViewData["Readonly"]">
+        <div class="btn-ground text-center pb-1">
+                <button class="btn btn-primary" onclick="AddProduct(@Model.Id)">Ajouter</button>
+                <button class="btn btn-primary" onclick="IncrementLike(@Model.Id)">J'aime</button>
+        </div>
     </div>
 </div>

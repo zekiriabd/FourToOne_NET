@@ -1,10 +1,32 @@
-﻿@model IEnumerable<ProductManagment.Models.ProductModel>
+﻿@model IEnumerable<ProductModel>
+
 @{
     ViewData["Title"] = "ProductList";
 }
 <h1>ProductList</h1>
 
-
+@section scripts {
+<script>
+        function IncrementLike(id) {
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("IncrementLike", "Product")",
+                success: function (result) {
+                    $("#likeLabel_" + id).text(result);
+                }
+            });
+        }
+        function AddProduct(id) {
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("AddProduct", "Product")",
+                data: { id: id },
+                success: function (result) {}
+            });
+        }
+        
+ </script>
+}
 <div class="d-flex flex-row">
     @{
         foreach (var pro in Model)

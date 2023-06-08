@@ -4,7 +4,7 @@
     bool Readonly = (bool)ViewData["isActive"];
 }
 
-<div class="card h-100 shadow-sm @(Readonly ? "flex-column-reverse" : "")">
+<div class="card h-100 shadow-sm @(Readonly ? "flex-column-reverse" : "")>
     <img class="card-img-top" src="@Model.Image" alt="Card image cap">
     <div class="card-body">
         <h5 class="card-title">@Model.Name</h5>

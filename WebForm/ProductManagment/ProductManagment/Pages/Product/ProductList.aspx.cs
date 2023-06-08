@@ -1,6 +1,7 @@
 ﻿using ProductManagment.Models;
 using System;
 using System.Collections.Generic;
+using System.Web.UI.WebControls;
 
 namespace ProductManagment.Pages.Product
 {
@@ -44,10 +45,10 @@ namespace ProductManagment.Pages.Product
                 Discount = 50,
                 },
             };
-            
+            Repeater1.DataSource = Products;
+            Repeater1.DataBind();
 
-            GVProducts.DataSource = Products;
-            GVProducts.DataBind();
+
         }
     }
 }

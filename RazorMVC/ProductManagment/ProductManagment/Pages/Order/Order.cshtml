@@ -1,0 +1,15 @@
+﻿@model IEnumerable<ProductModel>
+@{
+    ViewData["Title"] = "OrderList";
+}
+<h1>OrderList</h1>
+
+<div class="d-flex flex-row">
+    @{
+        foreach (var pro in Model)
+        {
+            //@Html.Partial("_PartialViewName",@pro,new ViewDataDictionary(ViewData) { { "id", 1 } })
+            <partial name="../Components/Product" model="@pro" view-data='new ViewDataDictionary(ViewData) { { "Readonly", true } }' />
+        }
+    }
+</div>

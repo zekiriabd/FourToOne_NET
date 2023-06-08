@@ -10,16 +10,7 @@
 @{
     foreach (var pro in Model.Products)
     {
-       <partial name="Compents/ProductV" model="@pro" />
-        <button id="incrementButton">Incrémenter</button>
+       <partial name="Compents/ProductV" model="@pro" />        
     }
 }
 </div>
-<script>
-$(document).ready(function() {
-    $('#incrementButton').click(function() {
-            $('#counterValue').text(parseInt($('#counterValue').text()) + 1);
-    });
-
-});
-</script>

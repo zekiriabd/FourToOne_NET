@@ -15,9 +15,10 @@ namespace ProductManagment.Pages.Product
             var like = int.Parse(HttpContext.Session.GetString("like")) + 1 ;
             HttpContext.Session.SetString("like",like.ToString());
             OnGet();
-            var selectedPro = Products.First(x => x.Id == id).LikeCount = like;
+            Products.First(x => x.Id == id).LikeCount = like;
         }
-
+       
+        [HttpPost]
         public void OnPostAdd(int id)
         {
            HttpContext.Session.SetString("ids", HttpContext.Session.GetString("ids") + "," +  id.ToString());

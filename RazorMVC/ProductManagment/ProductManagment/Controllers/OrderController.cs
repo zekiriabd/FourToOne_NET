@@ -3,12 +3,13 @@ using ProductManagment.Models;
 
 namespace ProductManagment.Controllers
 {
-    public class ProductController : Controller
+    public class OrderController : Controller
     {
-        
-        public ActionResult ProductList()
+        public IActionResult Order()
         {
-            return View(AllProducts());
+            string[] selectionIds = HttpContext.Session.GetString("ids").Split(',');
+            var SelectedProducts = AllProducts().Where(x => selectionIds.Contains(x.Id.ToString())).ToList();
+            return View(SelectedProducts);
         }
         private List<ProductModel> AllProducts()
         {
@@ -28,7 +29,7 @@ namespace ProductManagment.Controllers
                  new ProductModel
                 {
                 Id = 2,
-                Name = "Nike Air Max 22222",
+                Name = "Nike Air Max 222222",
                 Image = "https://cdn11.bigcommerce.com/s-ktikayh2p6/images/stencil/original/products/475/20955/baskets-de-jogging-a-coussin-dair__55328.1665613384.jpg?c=1",
                 Comment = @"Confort rembourré
                         La semelle intermédiaire en mousse et l'unité Max Air au talon amortissent votre pied pour
@@ -51,22 +52,6 @@ namespace ProductManagment.Controllers
                 },
             };
         }
-
-        [HttpPost]
-        public IActionResult IncrementLike()
-        {
-            var currentLike = HttpContext.Session.GetInt32("Like") ?? 0;
-            currentLike++;
-            HttpContext.Session.SetInt32("Like", currentLike);
-            return Content(currentLike.ToString());
-        }
-
-        [HttpPost]
-        public void AddProduct(int id)
-        {
-            HttpContext.Session.SetString("ids", HttpContext.Session.GetString("ids") + "," + id.ToString());
-        }
-
 
     }
 }
